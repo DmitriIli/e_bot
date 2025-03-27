@@ -5,13 +5,6 @@ from models import metadata_obj, workers_table
 
 
 
-async def async_connection():
-    async with engine.connect() as conn:
-        res = await conn.execute(text('SELECT VERSION()'))
-        print('--------')
-        print(f'{res.first()=}')
-
-
 async def create_tables():
     async with engine.begin() as conn:
         engine.echo = False
@@ -20,7 +13,7 @@ async def create_tables():
         engine.echo = True
 
 
-async def insert_date():
+async def insert_data():
     async with engine.begin() as conn:
         await asyncio.sleep(1)
         # stmt = """ INSERT INTO workers(user_name) VALUES

@@ -12,6 +12,7 @@ workers_table = Table(
 )
 
 
-class Workers(Base):
+class WorkersORM(Base):
+    __tablename__ = "workers"
     id: Mapped[int] = mapped_column(primary_key=True)
-    username: Mapped[str]
+    user_name: Mapped[str]

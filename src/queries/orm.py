@@ -1,12 +1,19 @@
 import asyncio
 from sqlalchemy import text, insert
-from database import session_factory
-from models import Workers
+from models import WorkersORM
+from database import session_factory, Base, engine
+
+
+async def create_table():
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.drop_all)
+        await conn.run_sync(Base.metadata.create_all)
 
 
 async def insert_data():
     async with session_factory() as session:
-        worker = Workers(username='Name')
-        session.add(worker)
+        await asyncio.sleep(1)
+        work = WorkersORM(user_name='Name')
+        session.add(work)
         await session.flush()
         await session.commit()

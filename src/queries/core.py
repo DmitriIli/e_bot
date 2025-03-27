@@ -1,8 +1,7 @@
 import asyncio
-
-from sqlalchemy import text
+from sqlalchemy import text, insert
 from database import engine
-from models import metadata_obj
+from models import metadata_obj, workers_table
 
 
 
@@ -24,8 +23,17 @@ async def create_tables():
 async def insert_date():
     async with engine.begin() as conn:
         await asyncio.sleep(1)
-        stmt = """ INSERT INTO workers(user_name) VALUES
-                ('Jonh'),
-                ('Karl'); """
-        await conn.execute(text(stmt))
+        # stmt = """ INSERT INTO workers(user_name) VALUES
+        #         ('Jonh'),
+        #         ('Karl'); """
+        # await conn.execute(text(stmt))
+        # await conn.commit() 
+        
+        stmt = insert(workers_table).values(
+            [
+                {"user_name":"Jonh"},
+                {"user_name":"Karlito"},
+            ]
+        )
+        await conn.execute(stmt)
         await conn.commit() 

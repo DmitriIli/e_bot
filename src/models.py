@@ -1,3 +1,4 @@
+
 import datetime
 import enum
 from sqlalchemy import MetaData, Table, Column, Integer, String, text, ForeignKey
@@ -50,35 +51,5 @@ class UsersData(Base):
     user_name: Mapped[str]
     created_at: Mapped[created_at]
     updated_at: Mapped[updated_at]
-    type: Mapped[UsersType] = mapped_column(default='consumer')
-
-
-class Consumers(Base):
-    __tablename__ = 'consumers'
-    id: Mapped[int] = mapped_column(primary_key=True)
-    consumer_id: Mapped[int] = mapped_column(ForeignKey='users.id')
-
-
-class Contractors(Base):
-    __tablename__ = 'contractors'
-    id: Mapped[int] = mapped_column(primary_key=True)
-    contractor_id: Mapped[int] = mapped_column(ForeignKey='users.id')
-
-
-class Orders(Base):
-    __tablename__ = 'orders'
-    id: Mapped[int] = mapped_column(primary_key=True)
-    consumer_id: Mapped[int] = mapped_column(ForeignKey='users.id')
-    contractor_id: Mapped[int] = mapped_column(ForeignKey='users.id')
-    description: Mapped[str]
-    created_at: Mapped[created_at]
-    ending: Mapped[ending]
-    status: Mapped[Status]
-
-
-class FeedBack(Base):
-    __tablename__ = 'feedback'
-    id: Mapped[int] = mapped_column(primary_key=True)
-    order_id: Mapped[int] = mapped_column(ForeignKey='orders.id')
-    description: Mapped[str]
-    rating: Mapped[int]
+    tax: Mapped[tax_limit]
+    workload: Mapped[Workload] 

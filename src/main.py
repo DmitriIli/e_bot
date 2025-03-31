@@ -1,10 +1,9 @@
 import asyncio
 import sys
 import os
-from queries.orm import insert_data, create_table
+from queries.orm import AsyncORM
 
-
-sys.path.insert(1, os.path.join(sys.path[0], '..'))
+# sys.path.insert(1, os.path.join(sys.path[0], '..'))
 
 # asyncio.run(create_tables())
 # asyncio.run(insert_date())
@@ -12,8 +11,8 @@ sys.path.insert(1, os.path.join(sys.path[0], '..'))
 
 async def main():
     if __name__ == '__main__':
-        task1 = asyncio.create_task(create_table())
-        task2 = asyncio.create_task(insert_data())
+        task1 = asyncio.create_task(AsyncORM.create_table())
+        task2 = asyncio.create_task(AsyncORM.insert_data())
         await task1
         await task2
 
